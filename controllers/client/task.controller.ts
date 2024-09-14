@@ -19,7 +19,7 @@ export const index = async (req: Request, res: Response) => {
     const sort = {};
 
     const sortKey = `${req.query.sortKey}`;
-    const sortValue = `${req.query.sortValue}`;
+    const sortValue = req.query.sortValue;
 
     if(sortKey && sortValue){
         sort[sortKey] = sortValue;

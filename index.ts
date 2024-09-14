@@ -4,7 +4,6 @@ dotenv.config();
 
 import { connectDatabase } from "./config/database";
 connectDatabase();
-import Task from "./models/task.model";
 
 const app: Express = express();
 const port: number | string = process.env.PORT || 3003;
