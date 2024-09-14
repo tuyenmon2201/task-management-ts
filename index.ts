@@ -9,25 +9,9 @@ import Task from "./models/task.model";
 const app: Express = express();
 const port: number | string = process.env.PORT || 3003;
 
-app.get('/tasks', async (req: Request, res: Response) => {
-  const tasks = await Task.find({});
-  res.json(tasks);
-})
+import { routesApi } from "./routes/client/index.route";
 
-app.get('/tasks/detail/:id', async (req: Request, res: Response) => {
-  try {
-    const id = req.params.id;
-
-    const tasks = await Task.find({
-      _id: id,
-      deleted: false
-    });
-
-    res.json(tasks);
-  } catch (error) {
-    console.log(error);
-  }
-})
+routesApi(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
