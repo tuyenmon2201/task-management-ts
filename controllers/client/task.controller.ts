@@ -99,3 +99,24 @@ export const changeStatus = async (req: Request, res: Response) => {
         });
     }
 }
+
+export const create = async (req: Request, res: Response) => {
+    try {
+
+        // req.body.createdBy = req.user.id;
+
+        const task = new Task(req.body);
+
+        await task.save();
+
+        res.json({
+            message: "Tạo công việc thành công!",
+            task: task
+        });
+
+    } catch (error) {
+        res.json({
+            message: "Not found"
+        });
+    }
+}
