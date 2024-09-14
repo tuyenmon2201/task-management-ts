@@ -140,3 +140,25 @@ export const edit = async (req: Request, res: Response) => {
         });
     }
 }
+
+export const deleteTask = async (req: Request, res: Response) => {
+    try {
+
+        const ids = req.body.ids;
+
+        await Task.updateMany({
+            _id: { $in: ids }
+        }, {
+            deleted: true
+        });
+
+        res.json({
+            message: "Xóa công việc thành công!"
+        });
+
+    } catch (error) {
+        res.json({
+            message: "Not found"
+        });
+    }
+}
