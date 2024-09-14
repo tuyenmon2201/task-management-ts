@@ -26,8 +26,26 @@ export const index = async (req: Request, res: Response) => {
     }
     // End sort
 
+    // Pagination
+
+    let limitItems: number = 2;
+    if(req.query.limitItems){
+        limitItems = parseInt(`${req.query.limitItems}`);
+    }
+
+    let page: number = 1;
+    if(req.query.page){
+        page = parseInt(`${req.query.page}`);
+    }
+
+    const skip: number = (page - 1) * limitItems;
+
+    // End pagination
+
     const tasks = await Task
         .find(find)
+        .limit(limitItems)
+        .skip(skip)
         .sort(sort)
 
     res.json(tasks);
